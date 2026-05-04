@@ -7,4 +7,5 @@ import java.util.List;
 public interface InputHandlerInterface {
     List<Strecke> handleInput(String path);
 
+
 }

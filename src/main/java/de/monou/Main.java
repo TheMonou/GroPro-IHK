@@ -20,8 +20,8 @@ public class Main {
 
         List<FahrplanStrategie> strategien = new ArrayList<>();
         strategien.add(new EinfacheFahrt());
-        strategien.add(new BeidseitigesWarten());
         strategien.add(new EinseitigesWarten());
+        strategien.add(new BeidseitigesWarten());
 
         InputHandlerInterface inputHandler = new ConcreteInputHandler();
         OutputHandlerInterface outputHandler = new ConcreteOutputHandler();

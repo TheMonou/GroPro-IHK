@@ -7,6 +7,7 @@ import de.monou.io.OutputHandlerInterface;
 import de.monou.model.Strecke;
 import de.monou.strategie.FahrplanStrategie;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class FahrplanErmittler {
     }
 
     public void ermittleFahrplan(String path){
-        List<Strecke> strecken = inputHandler.handleInput(path);
+        List<Strecke> strecken = inputHandler.handleInput(path+".in");
         List<List<Strecke>> fahrplaene = new ArrayList<>();
 
         for (FahrplanStrategie strategie : strategien) {
@@ -30,13 +31,13 @@ public class FahrplanErmittler {
             fahrplaene.add(fahrplan);
         }
 
-        for (Strecke strecke: strecken) {
-            System.out.println(strecke.toString());
-        }
-
+        outputHandler.createOutput(fahrplaene, getStrategieNamen(), path);
 
     }
 
+    private List<String> getStrategieNamen(){
+        return strategien.stream().map(FahrplanStrategie::getName).toList();
+    }
     public InputHandlerInterface getInputHandler() {
         return inputHandler;
     }

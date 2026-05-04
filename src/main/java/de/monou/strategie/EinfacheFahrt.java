@@ -8,8 +8,6 @@ import java.util.List;
 
 public class EinfacheFahrt implements FahrplanStrategie {
 
-    private static final int HALTEZEIT = 1; // 1 Minute Sicherheitswartezeit
-
     @Override
     public List<Strecke> ermittleFahrplan(List<Strecke> strecken) {
         List<Strecke> fahrplan = new ArrayList<>();
@@ -33,8 +31,8 @@ public class EinfacheFahrt implements FahrplanStrategie {
             int ankunft = startBhf.getHinAbfahrt() + aktuelleStrecke.getDauer();
             zielBhf.setHinAnkunft(ankunft);
 
-            // Abfahrt = Ankunft + 1 Minute Haltezeit
-            int abfahrt = ankunft + HALTEZEIT;
+            // Abfahrt = Ankunft + globale Einstiegszeit
+            int abfahrt = ankunft + Strecke.EINSTIEGSZEIT;
             zielBhf.setHinAbfahrt(abfahrt);
 
             // KONZEPT-UMSETZUNG: Zeiten in den Startbahnhof der nächsten Iteration kopieren
@@ -46,9 +44,9 @@ public class EinfacheFahrt implements FahrplanStrategie {
         }
 
         // --- RÜCKFAHRT ---
-        // Die Rückfahrt startet am letzten Bahnhof, 1 Minute nach Ankunft der Hinfahrt
+        // Die Rückfahrt startet am letzten Bahnhof, nach Ankunft der Hinfahrt + Einstiegszeit
         Bahnhof letzterBhf = fahrplan.get(fahrplan.size() - 1).getBahnhof2();
-        letzterBhf.setRueckAbfahrt(letzterBhf.getHinAnkunft() + HALTEZEIT);
+        letzterBhf.setRueckAbfahrt(letzterBhf.getHinAnkunft() + Strecke.EINSTIEGSZEIT);
 
         // Iteration rückwärts durch den Fahrplan
         for (int i = fahrplan.size() - 1; i >= 0; i--) {
@@ -61,8 +59,8 @@ public class EinfacheFahrt implements FahrplanStrategie {
             int ankunftRueck = startBhfRueck.getRueckAbfahrt() + aktuelleStrecke.getDauer();
             zielBhfRueck.setRueckAnkunft(ankunftRueck);
 
-            // Abfahrt = Ankunft + 1 Minute Haltezeit
-            int abfahrtRueck = ankunftRueck + HALTEZEIT;
+            // Abfahrt = Ankunft + globale Einstiegszeit
+            int abfahrtRueck = ankunftRueck + Strecke.EINSTIEGSZEIT;
             zielBhfRueck.setRueckAbfahrt(abfahrtRueck);
 
             // KONZEPT-UMSETZUNG: Zeiten in die nächste Iteration (rückwärts) kopieren
@@ -71,8 +69,18 @@ public class EinfacheFahrt implements FahrplanStrategie {
                 vorherigerZielBhf.setRueckAbfahrt(abfahrtRueck);
                 vorherigerZielBhf.setRueckAnkunft(ankunftRueck);
             }
+
+            // HIER IST DAS NEUE UPDATE:
+            // Alle 4 Zeiten sind jetzt da, wir prüfen auf Kollision!
+            // Das setzt automatisch das Flag in der Strecke auf true, falls nötig.
+            aktuelleStrecke.pruefeKollision();
         }
 
         return fahrplan;
+    }
+
+    @Override
+    public String getName() {
+        return "Einfache Fahrt";
     }
 }

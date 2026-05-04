@@ -12,4 +12,8 @@ public class BeidseitigesWarten implements FahrplanStrategie {
         return strecken;
     }
 
+    @Override
+    public String getName() {
+        return "Beidseitiges Warten";
+    }
 }

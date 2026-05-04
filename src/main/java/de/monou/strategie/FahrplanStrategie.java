@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface FahrplanStrategie {
     List<Strecke> ermittleFahrplan(List<Strecke> strecken);
+    String getName();
 }
