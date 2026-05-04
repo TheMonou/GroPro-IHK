@@ -1,6 +1,0 @@
-** Vom Programm ermittelte Lösung
-Dummy output 1
-Dummy output 2
-**errors: 
-Dummy output 1
-Dummy output 2
