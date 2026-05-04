@@ -15,7 +15,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         String inputPath = args[0];
 
         List<FahrplanStrategie> strategien = new ArrayList<>();
