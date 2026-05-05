@@ -6,14 +6,39 @@ import de.monou.model.Bahnhof;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+package de.monou.io;
+
+import de.monou.model.Strecke;
+import de.monou.model.Bahnhof;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Konkrete Implementierung von {@link OutputHandlerInterface}.
+ *
+ * Diese Klasse formatiert die berechneten Fahrpläne und schreibt sie in
+ * eine Textdatei unter {@code output/}. Die Ausgabe enthält eine Übersicht
+ * über Strecken, Abstände, Startzeit sowie für jede Strategie tabellarisch
+ * die Ankunfts- und Abfahrtszeiten, Wartezeiten, Kennzahlen und einen
+ * Kollisionshinweis.
+ */
 public class ConcreteOutputHandler implements OutputHandlerInterface {
 
     private static final String OUTPUT_PREFIX = "output/output_";
 
+    /**
+     * Schreibt die übergebenen Fahrpläne in eine Ausgabedatei.
+     *
+     * @param strecken Liste von Fahrplänen (jede Unterliste ist das Ergebnis einer Strategie)
+     * @param namen    Liste der Namen der Strategien (gleiche Reihenfolge wie {@code strecken})
+     * @param filename Ursprungspfad/-name der Eingabedatei (wird für den Output-Dateinamen verwendet)
+     * @throws OutputHandlerException bei I/O-Fehlern
+     */
     @Override
     public void createOutput(List<List<Strecke>> strecken, List<String> namen, String filename) {
 
@@ -76,6 +101,7 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
 
                 if (fahrplan == null || fahrplan.isEmpty()) {
                     writer.write("Kein Fahrplan ermittelt.\n\n");
+
                     continue;
                 }
 
@@ -167,6 +193,13 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
         }
     }
 
+    /**
+     * Summiert die positiven Wartezeiten zwischen den Bahnhöfen für Hin- und
+     * Rückfahrt.
+     *
+     * @param strecken Fahrplan, für den die Wartezeiten berechnet werden sollen
+     * @return int-Array der Länge 2: [0]=Wartezeit Hinfahrt, [1]=Wartezeit Rückfahrt
+     */
     @Override
     public int[] berechneWartezeiten(List<Strecke> strecken) {
         int warteHin = 0;
@@ -189,6 +222,12 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
         return new int[]{warteHin, warteRueck};
     }
 
+    /**
+     * Berechnet den Strafwert als Summe der Quadrate der Wartezeiten.
+     *
+     * @param wartezeiten Array mit Wartezeiten (z. B. von {@link #berechneWartezeiten(List)})
+     * @return berechneter Score
+     */
     @Override
     public int berechneScore(int[] wartezeiten) {
         int score = 0;

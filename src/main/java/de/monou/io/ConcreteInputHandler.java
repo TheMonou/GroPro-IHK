@@ -9,8 +9,31 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Konkrete Implementierung von {@link InputHandlerInterface} zum Einlesen
+ * der Eingabedateien im Projektformat.
+ *
+ * Erwartetes Format (vereinfachte Beschreibung):
+ * - Zeile 1: Kommentar/Metadaten (optional)
+ * - Zeile 2: Bahnhofsnamen (z. B. "A B C")
+ * - Zeile 3: Kommentar/Metadaten (optional)
+ * - Zeile 4: Abstände zwischen Bahnhöfen (z. B. "5 7")
+ * - Zeile 5: Kommentar/Metadaten (optional)
+ * - Zeile 6: Startzeit der Hinfahrt in Minuten (z. B. "17")
+ *
+ * Diese Klasse filtert leere Zeilen und Zeilen, die mit "**" beginnen,
+ * bevor die relevanten Zeilen geparst werden.
+ */
 public class ConcreteInputHandler implements InputHandlerInterface {
 
+    /**
+     * Liest die Datei unter {@code path} und gibt die daraus erzeugten
+     * {@link Strecke}-Objekte zurück.
+     *
+     * @param path Pfad zur Eingabedatei
+     * @return Liste von Strecken in Hinfahrt-Reihenfolge
+     * @throws InputHandlerException bei I/O-Fehlern oder ungültigem Dateiformat
+     */
     @Override
     public List<Strecke> handleInput(String path) throws InputHandlerException {
         List<String> input;
