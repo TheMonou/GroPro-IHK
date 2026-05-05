@@ -7,27 +7,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Strategie fuer die Fahrplanermittlung mit beidseitigem Warten.
+ * Strategie für die Fahrplanermittlung mit beidseitigem Warten.
  *
- * Die Strategie prueft stufenweise mehrere Varianten: zuerst eine einfache
+ * <p>
+ * Die Strategie prüft stufenweise mehrere Varianten: zuerst eine einfache
  * Fahrt ohne Zusatzwartezeiten, danach eine reine Startverschiebung der
- * Rueckfahrt und schliesslich eine Greedy-Relaxation mit Wartezeiten auf
- * Hin- und Rueckfahrt. Ziel ist ein kollisionsfreier Fahrplan mit moeglichst
- * niedrigen Strafpunkten.
+ * Rückfahrt und schließlich eine Greedy-Relaxation mit Wartezeiten auf
+ * Hin- und Rückfahrt. Ziel ist ein kollisionsfreier Fahrplan mit möglichst
+ * niedrigem Score.
+ * </p>
  */
 public class BeidseitigesWarten implements FahrplanStrategie {
 
     /**
-     * Ermittelt einen Fahrplan fuer die uebergebenen Strecken mit beidseitiger
+     * Ermittelt einen Fahrplan für die übergebenen Strecken mit beidseitiger
      * Wartezeitoptimierung.
      *
-     * Die Methode gibt zuerst direkt eine kollisionsfreie Basisloesung
-     * zurueck, falls moeglich. Andernfalls werden Startverschiebungen und
-     * anschliessend iterativ zusaetzliche Wartezeiten bewertet.
+     * <p>
+     *     Die Strategie verfolgt einen mehrstufigen Ansatz:
+     *     <ol>
+     *         <li>Berechnung einer einfachen Fahrt ohne Zusatzwartezeiten.</li>
+     *         <li>Iterative Verschiebung des Rückfahrtstarts, um Kollisionen zu vermeiden.</li>
+     *         <li>Greedy-Relaxation: Bei verbleibenden Kollisionen werden echte Wartezeiten auf Hin- und Rückfahrt
+     *         eingefügt, um die Kollisionen zu beseitigen. Dabei wird eine Kostenfunktion verwendet, die sowohl lokale
+     *         Strafpunkte für die eingefügten Wartezeiten als auch eine Ungleichgewichtsstrafe berücksichtigt
+     *         (um zu verhindern, dass alle Wartezeiten auf einer Seite konzentriert werden).</li>
+     *     </ol>
+     * </p>
      *
      * @param strecken geordnete Liste der Strecken
      * @return berechneter Fahrplan oder bei ausbleibender Verbesserung die
-     *         urspruengliche Eingabeliste
+     *         ursprüngliche Eingabeliste
      */
     @Override
     public List<Strecke> ermittleFahrplan(List<Strecke> strecken) {
@@ -139,9 +149,9 @@ public class BeidseitigesWarten implements FahrplanStrategie {
     }
 
     /**
-     * Prueft, ob der uebergebene Fahrplan mindestens eine Kollision enthaelt.
+     * Prüft, ob der übergebene Fahrplan mindestens eine Kollision enthält.
      *
-     * @param fahrplan zu pruefender Fahrplan
+     * @param fahrplan zu prüfender Fahrplan
      * @return {@code true}, wenn mindestens eine Strecke als Kollision markiert ist,
      *         sonst {@code false}
      */
@@ -153,17 +163,17 @@ public class BeidseitigesWarten implements FahrplanStrategie {
     }
 
     /**
-     * Berechnet alle Zeitwerte fuer Hin- und Rueckfahrt eines Fahrplans.
+     * Berechnet alle Zeitwerte für Hin- und Rückfahrt eines Fahrplans.
      *
-     * Wenn {@code verschiebung == -1}, startet die Rueckfahrt sofort nach
-     * der Hinfahrt. Andernfalls wird der Rueckfahrtstart auf die vorgegebene
+     * Wenn {@code verschiebung == -1}, startet die Rückfahrt sofort nach
+     * der Hinfahrt. Andernfalls wird der Rückfahrtstart auf die vorgegebene
      * Minutenlage im Stundenraster ausgerichtet.
      *
      * @param fahrplan Fahrplan, dessen Zeiten gesetzt werden
-     * @param verschiebung Ziel-Minutenlage fuer den Rueckfahrtstart oder {@code -1}
+     * @param verschiebung Ziel-Minutenlage für den Rückfahrtstart oder {@code -1}
      * @param startzeitHinfahrt absolute Startzeit der Hinfahrt
-     * @param wartezeitenHin zusaetzliche Wartezeiten pro Abschnitt auf der Hinfahrt
-     * @param wartezeitenRueck zusaetzliche Wartezeiten pro Abschnitt auf der Rueckfahrt
+     * @param wartezeitenHin zusätzliche Wartezeiten pro Abschnitt auf der Hinfahrt
+     * @param wartezeitenRueck zusätzliche Wartezeiten pro Abschnitt auf der Rückfahrt
      */
     private void berechneZeiten(List<Strecke> fahrplan, int verschiebung, int startzeitHinfahrt, int[] wartezeitenHin, int[] wartezeitenRueck) {
 
@@ -202,7 +212,7 @@ public class BeidseitigesWarten implements FahrplanStrategie {
         int fruehesterStartRueckfahrt = letzterBahnhof.getHinAnkunft() + Strecke.EINSTIEGSZEIT;
         int absoluterStartRueckfahrt = fruehesterStartRueckfahrt;
 
-        // Tier 1 Check: Wenn verschiebung != -1, passe den Start an den Loop an. Sonst belasse ihn ASAP.
+        // Wenn verschiebung != -1, passe den Start an den Loop an. Sonst belasse ihn ASAP.
         if (verschiebung != -1) {
             while (absoluterStartRueckfahrt % 60 != verschiebung) {
                 absoluterStartRueckfahrt++;
@@ -237,9 +247,9 @@ public class BeidseitigesWarten implements FahrplanStrategie {
     }
 
     /**
-     * Erstellt eine tiefe Kopie des uebergebenen Fahrplans.
+     * Erstellt eine tiefe Kopie des übergebenen Fahrplans.
      *
-     * @param original urspruenglicher Fahrplan
+     * @param original ursprünglicher Fahrplan
      * @return neue Liste mit kopierten Streckenobjekten
      */
     private List<Strecke> kopiereFahrplan(List<Strecke> original) {
