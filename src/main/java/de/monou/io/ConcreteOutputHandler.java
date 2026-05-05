@@ -131,7 +131,7 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                     int abfahrt = fahrplan.get(j).getBahnhof2().getRueckAbfahrt();
                     int pause = (abfahrt - ankunft) - Strecke.EINSTIEGSZEIT;
                     if (pause > 0) {
-                        writer.write(String.format("(%02d)\t", pause));
+                        writer.write(String.format("(%02d)", pause));
                     } else {
                         writer.write("\t");
                     }
