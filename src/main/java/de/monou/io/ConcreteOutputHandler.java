@@ -81,7 +81,8 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                 // 1. Zeile: Ankunft Hinfahrt (Überspringt Startbahnhof)
                 writer.write("An \t\t");
                 for (Strecke s : fahrplan) {
-                    writer.write(String.format("%02d\t", s.getBahnhof2().getHinAnkunft() % 60));
+                    // FIX: Leerzeichen vor %02d
+                    writer.write(String.format(" %02d\t", s.getBahnhof2().getHinAnkunft() % 60));
                 }
                 writer.write("\n");
 
@@ -92,7 +93,8 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                     int abfahrt = fahrplan.get(j+1).getBahnhof1().getHinAbfahrt();
                     int pause = (abfahrt - ankunft) - Strecke.EINSTIEGSZEIT;
                     if (pause > 0) {
-                        writer.write(String.format("(%02d)\t", pause));
+                        // WIE IN DEINEM ROLLBACK: Kein \t danach!
+                        writer.write(String.format("(%02d)", pause));
                     } else {
                         writer.write("\t");
                     }
@@ -101,18 +103,22 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
 
                 // 3. Zeile: Abfahrt Hinfahrt (NUR Bahnhof1 der jeweiligen Strecke = überspringt den letzten Bahnhof)
                 writer.write("Ab \t");
-                for (Strecke s : fahrplan) {
-                    writer.write(String.format("%02d\t", s.getBahnhof1().getHinAbfahrt() % 60));
+                // FIX: Leerzeichen vor %02d
+                writer.write(String.format(" %02d\t", fahrplan.get(0).getBahnhof1().getHinAbfahrt() % 60));
+                List<Strecke> fahrplanOhneLetztes = fahrplan.subList(0, fahrplan.size() - 1);
+                for (Strecke s : fahrplanOhneLetztes) {
+                    writer.write(String.format(" %02d\t", s.getBahnhof2().getHinAbfahrt() % 60));
                 }
                 writer.write("\n");
 
                 // 4. Zeile: Bahnhofsnamen (MIT KOLLISIONS-CHECK)
-                writer.write("\t" + fahrplan.get(0).getBahnhof1().getName());
+                // FIX: Leerzeichen nach dem Tab für perfekte Zentrierung
+                writer.write("\t " + fahrplan.get(0).getBahnhof1().getName());
                 for (Strecke s : fahrplan) {
                     if (s.isKollision()) {
                         writer.write(" x " + s.getBahnhof2().getName());
                     } else {
-                        writer.write("\t" + s.getBahnhof2().getName());
+                        writer.write("\t " + s.getBahnhof2().getName());
                     }
                 }
                 writer.write("\n");
@@ -120,7 +126,8 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                 // 5. Zeile: Abfahrt Rückfahrt (NUR Bahnhof2 der jeweiligen Strecke = überspringt den ersten Bahnhof)
                 writer.write("Ab \t\t");
                 for (Strecke s : fahrplan) {
-                    writer.write(String.format("%02d\t", s.getBahnhof2().getRueckAbfahrt() % 60));
+                    // FIX: Leerzeichen vor %02d
+                    writer.write(String.format(" %02d\t", s.getBahnhof2().getRueckAbfahrt() % 60));
                 }
                 writer.write("\n");
 
@@ -131,6 +138,7 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                     int abfahrt = fahrplan.get(j).getBahnhof2().getRueckAbfahrt();
                     int pause = (abfahrt - ankunft) - Strecke.EINSTIEGSZEIT;
                     if (pause > 0) {
+                        // WIE IN DEINEM ROLLBACK: Kein \t danach!
                         writer.write(String.format("(%02d)", pause));
                     } else {
                         writer.write("\t");
@@ -141,7 +149,8 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
                 // 7. Zeile: Ankunft Rückfahrt (Überspringt den letzten Bahnhof)
                 writer.write("An \t");
                 for (Strecke s : fahrplan) {
-                    writer.write(String.format("%02d\t", s.getBahnhof1().getRueckAnkunft() % 60));
+                    // FIX: Leerzeichen vor %02d
+                    writer.write(String.format(" %02d\t", s.getBahnhof1().getRueckAnkunft() % 60));
                 }
                 writer.write("\n");
 
