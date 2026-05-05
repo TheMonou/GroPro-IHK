@@ -5,8 +5,6 @@ import de.monou.model.Bahnhof;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
-package de.monou.io;
 
 import de.monou.model.Strecke;
 import de.monou.model.Bahnhof;
