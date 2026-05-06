@@ -39,7 +39,7 @@ Berechnet die Hinfahrt exakt wie bei der "Einfachen Fahrt". Für die Rückfahrt 
 Führt zunächst eine Fahrplanerstellung der Strategie des einseitigen Wartens durch. Danach werden die Indizes der von Wartezeit betroffenen Strecken abgerufen. Die Wartezeiten werden schrittweise sinnvoll auf Hin- und Rückfahrt aufgeteilt. Anschließend wird erneut auf Kollisionen geprüft und der Vorgang wiederholt, bis der Score minimiert ist.
 
 ### 2.5 Fahrplanermittler
-Der `FahrplanErmittler` ist die zentrale Steuerungskomponente des Programms. Sie initialisiert den Eingabe-Handler, leitet die eingelesenen Daten an die Strategien weiter, lässt sich jeweils eine Lösung zurückgeben und leitet diese an den Output-Handler weiter.
+Der `eisenbahngesellschaft.FahrplanErmittler` ist die zentrale Steuerungskomponente des Programms. Sie initialisiert den Eingabe-Handler, leitet die eingelesenen Daten an die Strategien weiter, lässt sich jeweils eine Lösung zurückgeben und leitet diese an den Output-Handler weiter.
 
 ### 2.6 Ausgabe
 Die Ausgabe findet ebenfalls mithilfe des Interfaces `OutputHandlerInterface` statt. Die Klasse `ConcreteOutputHandler` formatiert die Lösungen der Strategien in eine tabellarische Form. Sie berechnet die Gesamtdauer, die Summe der Wartezeiten sowie den finalen Score (Strafen) und gibt diese in der Konsole bzw. Datei aus.
@@ -76,13 +76,13 @@ Die Ausgabe findet ebenfalls mithilfe des Interfaces `OutputHandlerInterface` st
     * `- kollision: boolean`
     * `- dauer: int`
 
-### 3.4 Controller / Main
-* **FahrplanErmittler**
+### 3.4 Controller / eisenbahngesellschaft.Main
+* **eisenbahngesellschaft.FahrplanErmittler**
     * `- strategien: List<FahrplanStrategie>`
     * `- inputHandler: InputHandlerInterface`
     * `- outputHandler: OutputHandlerInterface`
     * `+ ermittleFahrplan(path: String): void`
-* **Main**
+* **eisenbahngesellschaft.Main**
     * `+ main(args: String[]): void`
 
 ![[UML(grob).png]]

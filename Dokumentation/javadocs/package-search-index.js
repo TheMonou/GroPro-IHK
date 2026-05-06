@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"de.monou"},{"l":"de.monou.io"},{"l":"de.monou.model"},{"l":"de.monou.strategie"}];updateSearchResults();

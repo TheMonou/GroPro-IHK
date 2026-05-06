@@ -5,31 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.monou</groupId>
-    <artifactId>GroProBaseProject</artifactId>
+    <artifactId>IHK-Entwicklung-Eines-Softwaresystems</artifactId>
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <!-- Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.17</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Logback implementation -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.13</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -40,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.monou.Main</mainClass>
+                            <mainClass>eisenbahngesellschaft.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

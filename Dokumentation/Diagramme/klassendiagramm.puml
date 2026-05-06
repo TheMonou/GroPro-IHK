@@ -1,0 +1,113 @@
+@startuml
+' UML-Klassendiagramm fuer GroPro-IHK
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+title GroPro-IHK - UML Klassendiagramm
+
+package "eisenbahngesellschaft" {
+  class Main {
+    +main(args: String[]): void
+  }
+
+  class FahrplanErmittler {
+    -strategien: List<FahrplanStrategie>
+    -inputHandler: InputHandlerInterface
+    -outputHandler: OutputHandlerInterface
+    +FahrplanErmittler(inputHandler: InputHandlerInterface, outputHandler: OutputHandlerInterface)
+    +ermittleFahrplan(path: String): void
+    +getInputHandler(): InputHandlerInterface
+    +setInputHandler(inputHandler: InputHandlerInterface): void
+    +getOutputHandler(): OutputHandlerInterface
+    +setOutputHandler(outputHandler: OutputHandlerInterface): void
+    +addStrategie(strategie: FahrplanStrategie): void
+    +clearStrategien(): void
+  }
+}
+
+package "eisenbahngesellschaft.io" {
+  interface InputHandlerInterface {
+    +handleInput(path: String): List<Strecke>
+  }
+
+  interface OutputHandlerInterface {
+    +createOutput(strecken: List<List<Strecke>>, namen: List<String>, filename: String): void
+    +berechneWartezeiten(strecken: List<Strecke>): int[]
+    +berechneScore(wartezeiten: int[]): int
+  }
+
+  class ConcreteInputHandler {
+    +handleInput(path: String): List<Strecke>
+  }
+
+  class ConcreteOutputHandler {
+    +createOutput(strecken: List<List<Strecke>>, namen: List<String>, filename: String): void
+    +berechneWartezeiten(strecken: List<Strecke>): int[]
+    +berechneScore(wartezeiten: int[]): int
+  }
+
+  class InputHandlerException
+  class OutputHandlerException
+}
+
+package "eisenbahngesellschaft.model" {
+  class Bahnhof {
+    -name: String
+    -hinAnkunft: int
+    -hinAbfahrt: int
+    -rueckAnkunft: int
+    -rueckAbfahrt: int
+    +Bahnhof(name: String)
+    +copy(): Bahnhof
+  }
+
+  class Strecke {
+    -bahnhof1: Bahnhof
+    -bahnhof2: Bahnhof
+    -dauer: int
+    -kollision: boolean
+    {static} +EINSTIEGSZEIT: int
+    {static} +SICHERHEITSWARTEZEIT: int
+    +Strecke(bahnhof1: Bahnhof, bahnhof2: Bahnhof, dauer: int)
+    +pruefeKollision(): boolean
+    +copy(): Strecke
+  }
+}
+
+package "eisenbahngesellschaft.strategie" {
+  interface FahrplanStrategie {
+    +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+    +getName(): String
+  }
+
+  class EinfacheFahrt
+  class EinseitigesWarten
+  class BeidseitigesWarten
+}
+
+
+
+FahrplanErmittler o-- "0..*" FahrplanStrategie : nutzt
+FahrplanErmittler --> InputHandlerInterface : liest
+FahrplanErmittler --> OutputHandlerInterface : schreibt
+
+ConcreteInputHandler ..|> InputHandlerInterface
+ConcreteOutputHandler ..|> OutputHandlerInterface
+
+
+
+InputHandlerException --|> RuntimeException
+OutputHandlerException --|> RuntimeException
+
+Strecke *-- Bahnhof
+
+EinfacheFahrt ..|> FahrplanStrategie
+EinseitigesWarten ..|> FahrplanStrategie
+BeidseitigesWarten ..|> FahrplanStrategie
+
+
+
+
+
+@enduml
+
