@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"de.monou"},{"l":"de.monou.io"},{"l":"de.monou.model"},{"l":"de.monou.strategie"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"eisenbahngesellschaft"},{"l":"eisenbahngesellschaft.io"},{"l":"eisenbahngesellschaft.model"},{"l":"eisenbahngesellschaft.strategie"}];updateSearchResults();

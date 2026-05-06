@@ -1,6 +1,6 @@
 package eisenbahngesellschaft;
 
-import de.monou.io.*;
+
 import eisenbahngesellschaft.io.*;
 import eisenbahngesellschaft.strategie.BeidseitigesWarten;
 import eisenbahngesellschaft.strategie.EinfacheFahrt;
