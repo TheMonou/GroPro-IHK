@@ -1,5 +1,4 @@
 @startuml
-' UML-Klassendiagramm fuer GroPro-IHK
 skinparam packageStyle rectangle
 skinparam classAttributeIconSize 0
 
@@ -26,11 +25,11 @@ package "eisenbahngesellschaft" {
 }
 
 package "eisenbahngesellschaft.io" {
-  interface InputHandlerInterface {
+  class InputHandlerInterface <<interface>> {
     +handleInput(path: String): List<Strecke>
   }
 
-  interface OutputHandlerInterface {
+  class OutputHandlerInterface <<interface>> {
     +createOutput(strecken: List<List<Strecke>>, namen: List<String>, filename: String): void
     +berechneWartezeiten(strecken: List<Strecke>): int[]
     +berechneScore(wartezeiten: int[]): int
@@ -75,7 +74,7 @@ package "eisenbahngesellschaft.model" {
 }
 
 package "eisenbahngesellschaft.strategie" {
-  interface FahrplanStrategie {
+  class FahrplanStrategie <<interface>> {
     +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
     +getName(): String
   }
