@@ -58,7 +58,7 @@ public class BeidseitigesWarten implements FahrplanStrategie {
             int durchlaeufe = 0;
 
             // Die Relaxations-Schleife
-            while (!fahrplanStabil && durchlaeufe < 100) {
+            while (!fahrplanStabil && durchlaeufe < 100000) {
                 berechneZeiten(aktuellerFahrplan, verschiebung, startzeitHinfahrt, wartezeitenHin, wartezeitenRueck);
 
                 int kollisionsIndex = -1;

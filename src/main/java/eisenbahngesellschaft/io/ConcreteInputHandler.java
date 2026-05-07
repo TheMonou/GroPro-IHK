@@ -107,6 +107,11 @@ public class ConcreteInputHandler implements InputHandlerInterface {
                         + "Bite die Strecke: "  + strecke.toString() + " überprüfen."
                 );
             }
+            if(strecke.getDauer() < 1){
+                throw new InputHandlerException(
+                        "Die Fahrtdauer einer Strecker muss mindest 1 Minute betragen."
+                );
+            }
         }
         return strecken;
     }

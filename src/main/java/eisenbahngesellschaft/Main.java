@@ -20,8 +20,8 @@ public class Main {
         List<String> errors = new ArrayList<>();
         if (args.length == 3) {
             try{
-                int einstiegszeit = Integer.parseInt(args[1]);
-                int sicherheitsabstand = Integer.parseInt(args[2]);
+                int sicherheitsabstand = Integer.parseInt(args[1]);
+                int einstiegszeit = Integer.parseInt(args[2]);
 
                 Strecke.EINSTIEGSZEIT = einstiegszeit;
                 Strecke.SICHERHEITSWARTEZEIT = sicherheitsabstand;

@@ -113,7 +113,6 @@ public class EinseitigesWarten implements FahrplanStrategie {
                 aktuelleStrecke.setKollision(false);
             }
 
-            //TODO: Änderung vs Konzept markieren
 
             // 3. Prüfung auf Einhaltung der Sicherheitswartezeit
             // Auch ohne Streckenkollision muss die Sicherheitswartezeit im Bahnhof gelten

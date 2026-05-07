@@ -106,22 +106,20 @@ public class Strecke {
         int rAb = bahnhof2.getRueckAbfahrt() % 60;
         int rAn = rAb + dauer;
 
-        // 2. Prüfen auf Überschneidung: (A < D) && (C < B)
-        // Da die Züge alle 60 Minuten fahren, muss geprüft werden, ob der Gegenzug
-        // in dieser Stunde, in der vorherigen oder in der nächsten Stunde kollidiert.
+        // 2. Prüfen auf Überschneidung: (A <= D) && (C <= B)
+        // Das "<=" erzwingt die Sicherheitsminute, da exakt gleiche Minuten als Kollision gelten!
 
         // Prüft die Rückfahrt, die eine Stunde vorher abgefahren ist
-        boolean overlapVorher = (hinAb < (rAn - 60)) && ((rAb - 60) < hinAn);
+        boolean overlapVorher = (hinAb <= (rAn - 60)) && ((rAb - 60) <= hinAn);
 
         // Prüft die Rückfahrt in der gleichen Stunde
-        boolean overlapGleich = (hinAb < rAn) && (rAb < hinAn);
+        boolean overlapGleich = (hinAb <= rAn) && (rAb <= hinAn);
 
         // Prüft die Rückfahrt, die eine Stunde später abfährt
-        boolean overlapSpaeter = (hinAb < (rAn + 60)) && ((rAb + 60) < hinAn);
+        boolean overlapSpaeter = (hinAb <= (rAn + 60)) && ((rAb + 60) <= hinAn);
 
         // Wenn in irgendeinem dieser 60-Minuten-Takte eine Überschneidung vorliegt -> Kollision!
         this.kollision = overlapVorher || overlapGleich || overlapSpaeter;
-
 
         return this.kollision;
     }
