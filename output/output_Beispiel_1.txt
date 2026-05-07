@@ -1,0 +1,45 @@
+Strecke:
+A B C D
+Abstaende:
+25 19 17
+Start Hinfahrt:
+12
+Anzahl Bahnhöfe: 4
+Mindestdauer : 63
+
+Einfache Fahrt:
+An 		 37	 57	 15	
+Wa 				
+Ab 	 12	 38	 58	
+	 A x B x C	 D
+Ab 		 54	 34	 16	
+Wa 				
+An 	 19	 53	 33	
+Gesamtdauer Hinfahrt, Rückfahrt : 63, 63
+Summe Wartezeiten Hinfahrt, Rückfahrt : 0, 0
+Summe Strafen : 0
+
+Einseitiges Warten:
+An 		 37	 57	 15	
+Wa 				
+Ab 	 12	 38	 58	
+	 A	 B	 C	 D
+Ab 		 38	 58	 16	
+Wa 		(20)(24)
+An 	 03	 17	 33	
+Gesamtdauer Hinfahrt, Rückfahrt : 63, 107
+Summe Wartezeiten Hinfahrt, Rückfahrt : 0, 44
+Summe Strafen : 1936
+
+Beidseitiges Warten:
+An 		 37	 57	 25	
+Wa 			(10)
+Ab 	 12	 38	 58	
+	 A	 B	 C	 D
+Ab 		 38	 08	 50	
+Wa 		(10)	
+An 	 03	 27	 07	
+Gesamtdauer Hinfahrt, Rückfahrt : 73, 73
+Summe Wartezeiten Hinfahrt, Rückfahrt : 10, 10
+Summe Strafen : 200
+
