@@ -1,0 +1,9 @@
+//Beispiel_Fehler_Abstandsanzahl.txt
+Strecke:
+A B
+
+Abstaende:
+10 20
+
+Start Hinfahrt:
+12

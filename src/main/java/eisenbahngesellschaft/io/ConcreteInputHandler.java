@@ -42,17 +42,22 @@ public class ConcreteInputHandler implements InputHandlerInterface {
             input = Files.readAllLines(Path.of(path))
                     .stream()
                     .filter(line -> !line.isBlank())
-                    .filter(line -> !line.startsWith("**")) // Good idea to ignore potential comment lines
+                    .filter(line -> !line.startsWith("//"))
                     .toList();
 
         } catch (IOException e) {
-            throw new InputHandlerException("Could not read file: " + e.getMessage());
+            throw new InputHandlerException(
+                    "Eingabedatei konnte nicht gelesen werden: "
+                    + e.getMessage()
+            );
         }
 
         List<Strecke> strecken = new ArrayList<>();
 
         if (input.isEmpty() || input.size() != 6) {
-            throw new InputHandlerException("Input file is empty or does not contain the right amount of lines.");
+            throw new InputHandlerException(
+                    "Eingabedatei ist entweder leer oder hat nicht das erwartete Format (6 relevante Zeilen)."
+            );
         }
 
         try {
@@ -65,26 +70,28 @@ public class ConcreteInputHandler implements InputHandlerInterface {
             // Zeile 5: Startzeit (z.B. "17")
             int startZeitHinfahrt = Integer.parseInt(input.get(5).trim());
 
-            // Sicherheitscheck: Es muss immer genau einen Abstand weniger geben als Bahnhöfe
+            if(bahnhoefeNamen.length < 2) {
+                throw new InputHandlerException("Es müssen mindestens zwei Bahnhöfe angegeben werden.");
+            }
+            // Es muss immer genau einen Abstand weniger geben als Bahnhöfe
             if (bahnhoefeNamen.length - 1 != abstaende.length) {
                 throw new InputHandlerException("Die Anzahl der Abstände passt nicht zur Anzahl der Bahnhöfe.");
             }
 
+
             // Strecken-Objekte aufbauen
             for (int i = 0; i < abstaende.length; i++) {
-                // Konzept-treu: Wir erstellen für JEDE Strecke komplett neue Bahnhof-Instanzen.
-                // Dadurch wird der Speicher nicht geteilt und deine Zuweisungs-Logik in den Strategien funktioniert.
+
                 Bahnhof b1 = new Bahnhof(bahnhoefeNamen[i]);
                 Bahnhof b2 = new Bahnhof(bahnhoefeNamen[i + 1]);
 
-                // Die initiale Startzeit setzen wir NUR beim allerersten Bahnhof der Hinfahrt.
+                // Die initiale Startzeit
                 if (i == 0) {
                     b1.setHinAbfahrt(startZeitHinfahrt);
                 }
 
                 int dauer = Integer.parseInt(abstaende[i]);
 
-                // Setze voraus, dass du einen entsprechenden Konstruktor in 'Strecke' hast.
                 Strecke strecke = new Strecke(b1, b2, dauer);
                 strecken.add(strecke);
             }
@@ -93,6 +100,14 @@ public class ConcreteInputHandler implements InputHandlerInterface {
             throw new InputHandlerException("Fehler beim Parsen der Zahlenwerte (Dauer oder Startzeit).");
         }
 
+        for(Strecke strecke:  strecken) {
+            if(strecke.getDauer() + Strecke.SICHERHEITSWARTEZEIT > 30) {
+                throw new InputHandlerException(
+                        "Die Summe aus Fahrtdauer und Sicherheitswartezeit darf nicht mehr als 30 Minuten sein. "
+                        + "Bite die Strecke: "  + strecke.toString() + " überprüfen."
+                );
+            }
+        }
         return strecken;
     }
 }

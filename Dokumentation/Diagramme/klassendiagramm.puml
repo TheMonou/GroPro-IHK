@@ -1,8 +1,11 @@
 @startuml
-skinparam packageStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam style strictuml
 
-title GroPro-IHK - UML Klassendiagramm
+hide circle
+
+title UML-Klassendiagramm Fahrplanermittlung
 
 package "eisenbahngesellschaft" {
   class Main {
@@ -87,26 +90,25 @@ package "eisenbahngesellschaft.strategie" {
 
 
 FahrplanErmittler o-- "0..*" FahrplanStrategie : nutzt
-FahrplanErmittler --> InputHandlerInterface : liest
-FahrplanErmittler --> OutputHandlerInterface : schreibt
+FahrplanErmittler -up-> InputHandlerInterface : liest
+FahrplanErmittler -up-> OutputHandlerInterface : schreibt
 
 ConcreteInputHandler ..|> InputHandlerInterface
 ConcreteOutputHandler ..|> OutputHandlerInterface
 
 
 
-InputHandlerException --|> RuntimeException
-OutputHandlerException --|> RuntimeException
+InputHandlerException -up-|> RuntimeException
+OutputHandlerException -up-|> RuntimeException
 
 Strecke *-- Bahnhof
 
-EinfacheFahrt ..|> FahrplanStrategie
-EinseitigesWarten ..|> FahrplanStrategie
-BeidseitigesWarten ..|> FahrplanStrategie
+EinfacheFahrt .up.|> FahrplanStrategie
+EinseitigesWarten .up.|> FahrplanStrategie
+BeidseitigesWarten .up.|> FahrplanStrategie
 
-
-
-
+model -right[hidden]-> FahrplanErmittler
+model -down[hidden]-> Main
 
 @enduml
 

@@ -2,6 +2,7 @@ package eisenbahngesellschaft;
 
 
 import eisenbahngesellschaft.io.*;
+import eisenbahngesellschaft.model.Strecke;
 import eisenbahngesellschaft.strategie.BeidseitigesWarten;
 import eisenbahngesellschaft.strategie.EinfacheFahrt;
 import eisenbahngesellschaft.strategie.EinseitigesWarten;
@@ -16,6 +17,22 @@ public class Main {
 
     public static void main(String[] args) {
         String inputPath = args[0];
+        List<String> errors = new ArrayList<>();
+        if (args.length == 3) {
+            try{
+                int einstiegszeit = Integer.parseInt(args[1]);
+                int sicherheitsabstand = Integer.parseInt(args[2]);
+
+                Strecke.EINSTIEGSZEIT = einstiegszeit;
+                Strecke.SICHERHEITSWARTEZEIT = sicherheitsabstand;
+            }catch(Exception e){
+                errors.add("Einstiegszeit und Sicherheitszeit konnten nicht gesetzt werden: "
+                        + e.getMessage()
+                );
+            }
+        }
+
+
 
         List<FahrplanStrategie> strategien = new ArrayList<>();
         strategien.add(new EinfacheFahrt());
@@ -32,11 +49,18 @@ public class Main {
         try {
             fahrplanErmittler.ermittleFahrplan(inputPath);
         } catch (InputHandlerException e) {
-            // Logs
+            errors.add(e.getMessage());
         } catch (OutputHandlerException e){
-            // Error
+            errors.add(e.getMessage());
         }
 
+        //Fehlermeldungen werden in die Konsole ausgegeben
+        if (errors.size() > 0) {
+            System.out.println("Es sind Fehler aufgetreten:");
+            for (String error : errors) {
+                System.out.println(error);
+            }
+        }
 
     }
 }

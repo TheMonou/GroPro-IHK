@@ -1,0 +1,76 @@
+@startuml
+skinparam style strictuml
+hide footbox
+scale max 800 width
+autonumber
+
+title UML-Sequenzdiagramm Fahrplanermittlung
+
+actor Benutzer
+participant Main
+participant "FahrplanErmittler" as FE
+participant "InputHandlerInterface" as IHI
+participant "FahrplanStrategie" as FS
+participant "OutputHandlerInterface" as OHI
+
+Benutzer -> Main: Programmstart mit inputPath
+activate Main
+create FE
+Main -> FE: new(inputHandler, outputHandler)
+
+loop für jede Strategie
+  Main -> FE: addStrategie(strategie)
+end
+
+alt Erfolgsfall
+  Main -> FE: ermittleFahrplan(inputPath)
+  activate FE
+  FE -> IHI: handleInput(path + ".txt")
+  IHI --> FE: strecken
+
+  loop für jede registrierte Strategie
+    FE -> FS: ermittleFahrplan(strecken)
+    FS --> FE: fahrplan
+  end
+
+  FE -> OHI: createOutput(fahrplaene, strategieNamen, path)
+  OHI --> FE: void
+  FE --> Main: void
+  deactivate FE
+
+else Fehler beim Einlesen
+  Main -> FE: ermittleFahrplan(inputPath)
+  activate FE
+  FE -> IHI: handleInput(path + ".txt")
+  IHI --x FE: InputHandlerException
+  FE --> Main: InputHandlerException
+  deactivate FE
+  Main -> Main: errors.add(e.getMessage())
+
+else Fehler beim Schreiben
+  Main -> FE: ermittleFahrplan(inputPath)
+  activate FE
+  FE -> IHI: handleInput(path + ".txt")
+  IHI --> FE: strecken
+
+  loop fuer jede registrierte Strategie
+    FE -> FS: ermittleFahrplan(strecken)
+    FS --> FE: fahrplan
+  end
+
+  FE -> OHI: createOutput(fahrplaene, strategieNamen, path)
+  OHI --x FE: OutputHandlerException
+  FE --x Main: OutputHandlerException
+  deactivate FE
+  Main -> Main: errors.add(e.getMessage())
+end
+
+opt errors nicht leer
+  loop für jede Fehlermeldung
+    Main -> Main: System.out.println(error)
+  end
+end
+
+deactivate Main
+@enduml
+

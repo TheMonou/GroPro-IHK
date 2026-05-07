@@ -1,0 +1,9 @@
+//Beispiel_Fehler_Bahnhofsanzahl.txt
+Strecke:
+A
+
+Abstaende:
+10
+
+Start Hinfahrt:
+12
