@@ -1,0 +1,9 @@
+//Beispiel_Erklaerung.txt
+Strecke:
+A B C
+
+Abstaende:
+25 19
+
+Start Hinfahrt:
+12

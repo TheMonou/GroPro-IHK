@@ -34,8 +34,7 @@ alt Erfolgsfall
   end
 
   FE -> OHI: createOutput(fahrplaene, strategieNamen, path)
-  OHI --> FE: void
-  FE --> Main: void
+
   deactivate FE
 
 else Fehler beim Einlesen

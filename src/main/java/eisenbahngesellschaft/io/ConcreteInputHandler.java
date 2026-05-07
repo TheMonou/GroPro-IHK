@@ -13,15 +13,7 @@ import java.util.List;
  * Konkrete Implementierung von {@link InputHandlerInterface} zum Einlesen
  * der Eingabedateien im Projektformat.
  *
- * Erwartetes Format (vereinfachte Beschreibung):
- * - Zeile 1: Kommentar/Metadaten (optional)
- * - Zeile 2: Bahnhofsnamen (z. B. "A B C")
- * - Zeile 3: Kommentar/Metadaten (optional)
- * - Zeile 4: Abstände zwischen Bahnhöfen (z. B. "5 7")
- * - Zeile 5: Kommentar/Metadaten (optional)
- * - Zeile 6: Startzeit der Hinfahrt in Minuten (z. B. "17")
- *
- * Diese Klasse filtert leere Zeilen und Zeilen, die mit "**" beginnen,
+ * Diese Klasse filtert leere Zeilen und Zeilen, die mit "//" beginnen,
  * bevor die relevanten Zeilen geparst werden.
  */
 public class ConcreteInputHandler implements InputHandlerInterface {
@@ -77,7 +69,10 @@ public class ConcreteInputHandler implements InputHandlerInterface {
             if (bahnhoefeNamen.length - 1 != abstaende.length) {
                 throw new InputHandlerException("Die Anzahl der Abstände passt nicht zur Anzahl der Bahnhöfe.");
             }
-
+            // Die Startzeit muss zwischen im Intervall [0; 59] liegen
+            if(startZeitHinfahrt < 0 || startZeitHinfahrt > 59) {
+                throw new InputHandlerException("Die Startzeit der Hinfahrt muss zwischen 0 und 59 Minuten liegen.");
+            }
 
             // Strecken-Objekte aufbauen
             for (int i = 0; i < abstaende.length; i++) {

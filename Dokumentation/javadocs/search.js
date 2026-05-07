@@ -24,22 +24,22 @@
  */
 "use strict";
 const messages = {
-    enterTerm: "Enter a search term",
-    noResult: "No results found",
-    oneResult: "Found one result",
-    manyResults: "Found {0} results",
-    loading: "Loading search index...",
-    searching: "Searching...",
-    redirecting: "Redirecting to first result...",
-    linkIcon: "Link icon",
-    linkToSection: "Link to this section"
+    enterTerm: "Geben Sie einen Suchbegriff ein",
+    noResult: "Keine Ergebnisse gefunden",
+    oneResult: "Ein Ergebnis gefunden",
+    manyResults: "{0} Ergebnisse gefunden",
+    loading: "Suchindex wird geladen...",
+    searching: "Suche wird ausgeführt...",
+    redirecting: "Zum ersten Ergebnis wird umgeleitet...",
+    linkIcon: "Linksymbol",
+    linkToSection: "Link zu diesem Abschnitt"
 }
 const categories = {
-    modules: "Modules",
+    modules: "Module",
     packages: "Packages",
-    types: "Classes and Interfaces",
-    members: "Members",
-    searchTags: "Search Tags"
+    types: "Klassen und Schnittstellen",
+    members: "Mitglieder",
+    searchTags: "Tags suchen"
 };
 const highlight = "<span class='result-highlight'>$&</span>";
 const NO_MATCH = {};

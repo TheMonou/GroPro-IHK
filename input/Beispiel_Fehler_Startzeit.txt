@@ -1,8 +1,9 @@
+//Beispiel_Fehler_Startzeit.txt
 Strecke:
 A B C D
 
 Abstaende:
-55 72 68
+25 19 17
 
 Start Hinfahrt:
-20
+-1

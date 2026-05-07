@@ -82,9 +82,24 @@ package "eisenbahngesellschaft.strategie" {
     +getName(): String
   }
 
-  class EinfacheFahrt
-  class EinseitigesWarten
-  class BeidseitigesWarten
+  class EinfacheFahrt {
+    +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+    +getName(): String
+  }
+
+  class EinseitigesWarten {
+    +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+    +getName(): String
+  }
+
+  class BeidseitigesWarten {
+    +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+    +getName(): String
+    -enthaeltKollisionen(fahrplan: List<Strecke>): boolean
+    -berechneZeiten(fahrplan: List<Strecke>, verschiebung: int, startzeitHinfahrt: int, wartezeitenHin: int[], wartezeitenRueck: int[]): void
+    -berechneScoreAusFahrplan(fahrplan: List<Strecke>): int
+    -kopiereFahrplan(original: List<Strecke>): List<Strecke>
+  }
 }
 
 
@@ -108,7 +123,7 @@ EinseitigesWarten .up.|> FahrplanStrategie
 BeidseitigesWarten .up.|> FahrplanStrategie
 
 model -right[hidden]-> FahrplanErmittler
-model -down[hidden]-> Main
+strategie -up[hidden]-> Main
 
 @enduml
 

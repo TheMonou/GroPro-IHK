@@ -28,7 +28,7 @@ public class ConcreteOutputHandler implements OutputHandlerInterface {
      *
      * @param strecken Liste von Fahrplänen (jede Unterliste ist das Ergebnis einer Strategie)
      * @param namen    Liste der Namen der Strategien (gleiche Reihenfolge wie {@code strecken})
-     * @param filename Ursprungspfad/-name der Eingabedatei (wird für den Output-Dateinamen verwendet)
+     * @param filename Ursprungsname der Eingabedatei (wird für den Output-Dateinamen verwendet)
      * @throws OutputHandlerException bei I/O-Fehlern
      */
     @Override

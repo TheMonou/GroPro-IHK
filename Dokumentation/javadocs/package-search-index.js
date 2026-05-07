@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"eisenbahngesellschaft"},{"l":"eisenbahngesellschaft.io"},{"l":"eisenbahngesellschaft.model"},{"l":"eisenbahngesellschaft.strategie"}];updateSearchResults();
+packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"eisenbahngesellschaft"},{"l":"eisenbahngesellschaft.io"},{"l":"eisenbahngesellschaft.model"},{"l":"eisenbahngesellschaft.strategie"}];updateSearchResults();

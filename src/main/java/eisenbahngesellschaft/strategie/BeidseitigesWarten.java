@@ -209,10 +209,7 @@ public class BeidseitigesWarten implements FahrplanStrategie {
         }
     }
 
-    /**
-     * NEU: Hilfsmethode, um die Strafpunkte eines fertigen Fahrplans (die Baseline)
-     * aus den Ankunfts- und Abfahrtszeiten zu rekonstruieren.
-     */
+
     private int berechneScoreAusFahrplan(List<Strecke> fahrplan) {
         int score = 0;
 
