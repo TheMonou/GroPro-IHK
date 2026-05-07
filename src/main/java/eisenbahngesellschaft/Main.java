@@ -78,7 +78,7 @@ public class Main {
         if (errors.size() > 0) {
             System.out.println("Es sind Fehler aufgetreten:");
             for (String error : errors) {
-                System.out.println(error);
+                System.out.println("[FEHLER]: " + error);
             }
         }
 

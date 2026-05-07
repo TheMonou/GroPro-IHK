@@ -2,8 +2,27 @@
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 skinparam style strictuml
+skinparam backgroundColor white
+
+skinparam package {
+  BackgroundColor white
+}
+
+skinparam package<<io>> {
+  BackgroundColor #DDEEFF
+}
+
+skinparam package<<model>> {
+  BackgroundColor #DFFFD6
+}
+
+skinparam package<<strategie>> {
+  BackgroundColor #FFF3CC
+}
 
 hide circle
+hide stereotype
+show <<interface>> stereotype
 
 title UML-Klassendiagramm Fahrplanermittlung
 
@@ -27,12 +46,12 @@ package "eisenbahngesellschaft" {
   }
 }
 
-package "eisenbahngesellschaft.io" {
-  class InputHandlerInterface <<interface>> {
+package "eisenbahngesellschaft.io" <<io>> {
+  interface InputHandlerInterface <<interface>> {
     +handleInput(path: String): List<Strecke>
   }
 
-  class OutputHandlerInterface <<interface>> {
+  interface OutputHandlerInterface <<interface>> {
     +createOutput(strecken: List<List<Strecke>>, namen: List<String>, filename: String): void
     +berechneWartezeiten(strecken: List<Strecke>): int[]
     +berechneScore(wartezeiten: int[]): int
@@ -52,7 +71,7 @@ package "eisenbahngesellschaft.io" {
   class OutputHandlerException
 }
 
-package "eisenbahngesellschaft.model" {
+package "eisenbahngesellschaft.model" <<model>> {
   class Bahnhof {
     -name: String
     -hinAnkunft: int
@@ -76,8 +95,8 @@ package "eisenbahngesellschaft.model" {
   }
 }
 
-package "eisenbahngesellschaft.strategie" {
-  class FahrplanStrategie <<interface>> {
+package "eisenbahngesellschaft.strategie" <<strategie>> {
+  interface FahrplanStrategie <<interface>> {
     +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
     +getName(): String
   }
