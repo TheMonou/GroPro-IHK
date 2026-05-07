@@ -1,11 +1,11 @@
 // Beispiel bei dem eine Kollision innerhalb des Sicherheitsabstandes stattfindet
 // Der Fall tritt nur auf, wenn ein gerader Wert für den Sicherheitsabstand gewählt wird
-// Bitte mit 'java -jar jar/eisenbahngesellschaft.jar "input/Beispiel_Kollision_Sicherheitsabstand.txt" ' ausführen
+// Bitte mit 'java -jar jar/eisenbahngesellschaft.jar "input/Beispiel_Kollision_Sicherheitsabstand" 2' ausführen
 Strecke:
 A B C
 
 Abstaende:
-10 19
+10 18
 
 Start Hinfahrt:
 0

@@ -70,7 +70,7 @@ public class BeidseitigesWarten implements FahrplanStrategie {
                 }
 
                 if (kollisionsIndex == -1) {
-                    fahrplanStabil = true; // Fixpunkt erreicht!
+                    fahrplanStabil = true;
                 } else {
                     Strecke streckeMitKollision = aktuellerFahrplan.get(kollisionsIndex);
 
