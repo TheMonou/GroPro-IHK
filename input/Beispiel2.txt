@@ -1,9 +1,8 @@
-//Beispiel_1.txt
 Strecke:
-A B C D
+A B C D E F G
 
 Abstaende:
-25 19 17
+5 8 6 7 3 2
 
 Start Hinfahrt:
-12
+17

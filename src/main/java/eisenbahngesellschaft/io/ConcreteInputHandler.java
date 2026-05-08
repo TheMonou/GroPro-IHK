@@ -99,12 +99,13 @@ public class ConcreteInputHandler implements InputHandlerInterface {
             if(strecke.getDauer() + Strecke.SICHERHEITSWARTEZEIT > 30) {
                 throw new InputHandlerException(
                         "Die Summe aus Fahrtdauer und Sicherheitswartezeit darf nicht mehr als 30 Minuten sein. "
-                        + "Bite die Strecke: "  + strecke.toString() + " überprüfen."
+                        + "Bitte die Strecke: "  + strecke.toString() + " überprüfen."
                 );
             }
             if(strecke.getDauer() < 1){
                 throw new InputHandlerException(
-                        "Die Fahrtdauer einer Strecker muss mindest 1 Minute betragen."
+                        "Die Fahrtdauer einer Strecke muss mindest 1 Minute betragen. "
+                        + "Bitte die Strecke: "  + strecke.toString() + " überprüfen."
                 );
             }
         }

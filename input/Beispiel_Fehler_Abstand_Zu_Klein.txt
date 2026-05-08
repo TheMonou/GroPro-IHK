@@ -1,9 +1,9 @@
-//Beispiel_Erklaerung_1.txt
+//Beispiel_Fehler_Abstand_Zu_Klein.txt
 Strecke:
 A B C
 
 Abstaende:
-25 19
+0 19
 
 Start Hinfahrt:
 12

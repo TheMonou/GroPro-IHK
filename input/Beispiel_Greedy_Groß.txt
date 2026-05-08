@@ -1,0 +1,9 @@
+//Beispiel_Greedy_Groß.txt
+Strecke:
+A B C D E F G H I J
+
+Abstaende:
+25 23 17 8 2 15 13 28 4
+
+Start Hinfahrt:
+35

@@ -1,9 +1,9 @@
-//Beispiel_Erklaerung_1.txt
+//Beispiel_Abstand_Keine_Zahl.txt
 Strecke:
 A B C
 
 Abstaende:
-25 19
+zehn 19
 
 Start Hinfahrt:
 12

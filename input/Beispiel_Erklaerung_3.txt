@@ -1,4 +1,4 @@
-//Beispiel_Erklaerung_1.txt
+//Beispiel_Erklaerung_3.txt
 Strecke:
 A B C
 

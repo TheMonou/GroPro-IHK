@@ -1,0 +1,9 @@
+//Beispiel_Kollision_Verschiebung.txt
+Strecke:
+A B C
+
+Abstaende:
+25 23
+
+Start Hinfahrt:
+44

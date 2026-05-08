@@ -1,9 +1,9 @@
-//Beispiel_Fehler_Dauer.txt
+//Beispiel_Fehler_Falsches_Format.txt
 Strecke:
 A B C D
 
-Abstaende:
-32 19 17
+
+13 19 17
 
 Start Hinfahrt:
 12

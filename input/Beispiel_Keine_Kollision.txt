@@ -1,8 +1,9 @@
+//Beispiel_Keine_Kollision.txt
 Strecke:
 A B C
 
 Abstaende:
-5 7
+12 9
 
 Start Hinfahrt:
 17

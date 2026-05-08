@@ -1,0 +1,9 @@
+//Beispiel_Fehler_Abstand_Zu_Groß.txt
+Strecke:
+A B C D
+
+Abstaende:
+32 19 17
+
+Start Hinfahrt:
+12

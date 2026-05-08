@@ -1,9 +1,9 @@
-//Beispiel_Fehler_Dauer.txt
+//Beispiel_Kollision_Greedy.txt
 Strecke:
 A B C D
 
 Abstaende:
-32 19 17
+25 23 17
 
 Start Hinfahrt:
-12
+35
