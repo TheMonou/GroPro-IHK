@@ -2,7 +2,8 @@
 skinparam style strictuml
 hide footbox
 scale max 800 width
-autonumber
+skinparam backgroundColor white
+
 
 title UML-Sequenzdiagramm Fahrplanermittlung
 
@@ -16,50 +17,61 @@ participant "OutputHandlerInterface" as OHI
 Benutzer -> Main: Programmstart mit inputPath
 activate Main
 create FE
-Main -> FE: new(inputHandler, outputHandler)
+Main -->> FE: new(inputHandler, outputHandler)
 
 loop für jede Strategie
   Main -> FE: addStrategie(strategie)
 end
 
-alt Erfolgsfall
+alt keine Exception
   Main -> FE: ermittleFahrplan(inputPath)
   activate FE
   FE -> IHI: handleInput(path + ".txt")
-  IHI --> FE: strecken
+  activate IHI
+  IHI -->> FE: strecken
+  deactivate IHI
 
   loop für jede registrierte Strategie
     FE -> FS: ermittleFahrplan(strecken)
-    FS --> FE: fahrplan
+    activate FS
+    FS -->> FE: fahrplan
+    deactivate FS
   end
 
   FE -> OHI: createOutput(fahrplaene, strategieNamen, path)
-
   deactivate FE
 
-else Fehler beim Einlesen
+else InputHandlerException
   Main -> FE: ermittleFahrplan(inputPath)
   activate FE
   FE -> IHI: handleInput(path + ".txt")
-  IHI --x FE: InputHandlerException
-  FE --> Main: InputHandlerException
+  activate IHI
+  IHI -->> FE: InputHandlerException
+  deactivate IHI
+  FE -->> Main: InputHandlerException
   deactivate FE
   Main -> Main: errors.add(e.getMessage())
 
-else Fehler beim Schreiben
+else OutputHandlerException
   Main -> FE: ermittleFahrplan(inputPath)
   activate FE
   FE -> IHI: handleInput(path + ".txt")
-  IHI --> FE: strecken
+  activate IHI
+  IHI -->> FE: strecken
+  deactivate IHI
 
   loop fuer jede registrierte Strategie
     FE -> FS: ermittleFahrplan(strecken)
-    FS --> FE: fahrplan
+    activate FS
+    FS -->> FE: fahrplan
+    deactivate FS
   end
 
   FE -> OHI: createOutput(fahrplaene, strategieNamen, path)
-  OHI --x FE: OutputHandlerException
-  FE --x Main: OutputHandlerException
+  activate OHI
+  OHI -->> FE: OutputHandlerException
+  deactivate OHI
+  FE -->> Main: OutputHandlerException
   deactivate FE
   Main -> Main: errors.add(e.getMessage())
 end

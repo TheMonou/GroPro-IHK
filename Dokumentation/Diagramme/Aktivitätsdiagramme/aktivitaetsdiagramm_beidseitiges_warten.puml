@@ -1,0 +1,107 @@
+@startuml UML_Aktivitaetsdiagramm_BeidseitigesWarten
+
+title Aktivitätsdiagramm: Strategie "Beidseitiges Warten"
+
+start
+
+if (Strecken null oder leer?) then (ja)
+    :Leere Liste zurückgeben;
+    stop
+else (nein)
+endif
+
+:Startzeit der Hinfahrt merken;
+
+partition "1. Einfache Fahrt" {
+    :Fahrplan kopieren;
+    :Zeiten berechnen\n(ohne Verschiebung, ohne Wartezeiten);
+
+    if (Keine Kollisionen?) then (ja)
+        :Fahrplan zurückgeben;
+        stop
+    else (nein)
+    endif
+}
+
+partition "2. Rückfahrt verschieben" {
+    :Verschiebung = 0;
+
+    while (Verschiebung < 60?) is (ja)
+        :Fahrplan kopieren;
+        :Zeiten berechnen\n(mit Verschiebung, ohne Wartezeiten);
+
+        if (Keine Kollisionen?) then (ja)
+            :Fahrplan zurückgeben;
+            stop
+        else (nein)
+        endif
+
+        :Verschiebung = Verschiebung + 1;
+    endwhile (nein)
+}
+
+partition "3. Baseline (Einseitiges Warten)" {
+    :Einseitiges Warten als\nFallback-Fahrplan berechnen;
+    :Niedrigste Strafpunkte =\nScore des Baseline-Plans;
+    :Bester Fahrplan = Baseline-Plan;
+}
+
+partition "4. Greedy Relaxation" {
+    :Verschiebung = 0;
+
+    while (Verschiebung < 60?) is (ja)
+        :Wartezeiten-Arrays initialisieren\n(Hin und Rück, alle 0);
+        :Fahrplan kopieren;
+        :fahrplanStabil = false\nDurchläufe = 0;
+
+        while (Nicht stabil UND Durchläufe < 100000?) is (ja)
+            :Zeiten berechnen\n(mit Verschiebung und Wartezeiten);
+
+            :Erste Kollision suchen;
+
+            if (Keine Kollision gefunden?) then (ja)
+                :fahrplanStabil = true;
+            else (nein)
+                :Option A berechnen:\nZusätzliche Wartezeit Hinfahrt;
+                :Option B berechnen:\nZusätzliche Wartezeit Rückfahrt;
+
+                :Globale Wartezeitsummen\nfür Hin und Rück berechnen;
+
+                :Lokale Strafpunkte berechnen\n(quadratische Kosten);
+                :Ungleichgewichtsstrafe berechnen\n(quadrierte Differenz);
+
+                :Gesamtkosten A und B bestimmen;
+
+                if (Gesamtkosten A <= B\nUND A gültig?) then (ja)
+                    :Wartezeit Hinfahrt\nam Kollisionsindex erhöhen;
+                else if (B gültig?) then (ja)
+                    :Wartezeit Rückfahrt\nam Kollisionsindex erhöhen;
+                else (nein)
+                    :Abbruch (Notausstieg);
+                endif
+            endif
+
+            :Durchläufe = Durchläufe + 1;
+        endwhile (nein)
+
+        if (Fahrplan stabil?) then (ja)
+            :Strafpunkte berechnen\n(Summe quadrierter Wartezeiten);
+
+            if (Strafpunkte < niedrigste Strafpunkte?) then (ja)
+                :Niedrigste Strafpunkte aktualisieren;
+                :Bester Fahrplan = aktueller Fahrplan;
+            else (nein)
+            endif
+        else (nein)
+        endif
+
+        :Verschiebung = Verschiebung + 1;
+    endwhile (nein)
+}
+
+:Besten Fahrplan zurückgeben;
+
+stop
+
+@enduml
+

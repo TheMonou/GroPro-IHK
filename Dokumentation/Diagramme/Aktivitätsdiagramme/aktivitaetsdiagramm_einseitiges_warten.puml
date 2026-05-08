@@ -1,0 +1,106 @@
+@startuml UML_Aktivitaetsdiagramm_EinseitigesWarten
+
+title Aktivitätsdiagramm: Strategie "Einseitiges Warten"
+
+start
+
+:Fahrplan als leere Liste initialisieren;
+
+:Strecken kopieren und in Fahrplan einfügen;
+
+if (Fahrplan leer?) then (ja)
+    :Leeren Fahrplan zurückgeben;
+    stop
+else (nein)
+endif
+
+:Erster Bahnhof:\nHinAnkunft = -1\nRückAbfahrt = -1;
+
+:Letzter Bahnhof:\nRückAnkunft = 0\nHinAbfahrt = 0;
+
+partition "Hinfahrt" {
+    :Index i = 0;
+
+    while (i < Anzahl Strecken?) is (ja)
+        :Aktuelle Strecke ermitteln;
+        :StartBhf = Bahnhof1\nZielBhf = Bahnhof2;
+
+        :Ankunft = StartBhf.HinAbfahrt + Streckendauer;
+        :ZielBhf.HinAnkunft = Ankunft;
+
+        :Abfahrt = Ankunft + Einstiegszeit;
+        :ZielBhf.HinAbfahrt = Abfahrt;
+
+        if (i < Anzahl Strecken - 1?) then (ja)
+            :Zeiten in nächsten\nStartbahnhof kopieren;
+        else (nein)
+        endif
+
+        :i = i + 1;
+    endwhile (nein)
+}
+
+partition "Rückfahrt mit Einfügen von Wartezeiten" {
+    :Letzter Bahnhof:\nRückAbfahrt = HinAnkunft + Einstiegszeit;
+
+    :Index i = Anzahl Strecken - 1;
+
+    while (i >= 0?) is (ja)
+        :Aktuelle Strecke ermitteln;
+        :StartBhfRück = Bahnhof2\nZielBhfRück = Bahnhof1;
+
+        :AnkunftRück = StartBhfRück.RückAbfahrt + Streckendauer;
+        :ZielBhfRück.RückAnkunft = AnkunftRück;
+
+        :AbfahrtRück = AnkunftRück + Einstiegszeit;
+        :ZielBhfRück.RückAbfahrt = AbfahrtRück;
+
+        if (Kollision auf Strecke?) then (ja)
+            :ZielZeit = (HinAnkunft + Einstiegszeit) mod 60;
+            :AktuelleZeit = RückAbfahrt mod 60;
+
+            :Verschiebung = (ZielZeit - AktuelleZeit) mod 60;
+
+            if (Verschiebung < 0?) then (ja)
+                :Verschiebung = Verschiebung + 60;
+            else (nein)
+            endif
+
+            :StartBhfRück.RückAbfahrt verschieben;
+
+            :Folgezeiten neu berechnen:\nAnkunftRück, AbfahrtRück;
+
+            :Kollisionsflag zurücksetzen;
+        else (nein)
+        endif
+
+        :StationsDiff = (RückAbfahrt - HinAnkunft) mod 60;
+
+        if (StationsDiff < 0?) then (ja)
+            :StationsDiff = StationsDiff + 60;
+        else (nein)
+        endif
+
+        if (StationsDiff < Sicherheitswartezeit?) then (ja)
+            :Shift = Sicherheitswartezeit - StationsDiff;
+            :StartBhfRück.RückAbfahrt verschieben;
+
+            :Folgezeiten neu berechnen:\nAnkunftRück, AbfahrtRück;
+        else (nein)
+        endif
+
+        if (i > 0?) then (ja)
+            :Zeiten in vorherigen\nZielbahnhof kopieren;
+        else (nein)
+        endif
+
+        :i = i - 1;
+    endwhile (nein)
+}
+
+:Fahrplan zurückgeben;
+
+stop
+
+@enduml
+
