@@ -1,0 +1,9 @@
+//Beispiel_Grenze_Bahnhof.txt
+Strecke:
+A B
+
+Abstaende:
+13
+
+Start Hinfahrt:
+12

@@ -1,9 +1,9 @@
-//Beispiel_Erklaerung_2.txt
+//Beispiel_Grenze_Abstand_2.txt
 Strecke:
 A B C
 
 Abstaende:
-20 20
+1 5
 
 Start Hinfahrt:
-0
+12
