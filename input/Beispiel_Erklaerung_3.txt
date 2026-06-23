@@ -3,7 +3,7 @@ Strecke:
 A B C D
 
 Abstaende:
-10 35 10
+10 25 10
 
 Start Hinfahrt:
 0
