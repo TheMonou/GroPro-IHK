@@ -38,12 +38,12 @@ public class EinfacheFahrt implements FahrplanStrategie {
         }
 
         // Der erste Bahnhof hat keine Ankunftszeit auf der Hinfahrt und keine Abfahrtszeit auf der Rückfahrt
-        strecken.get(0).getBahnhof1().setHinAnkunft(-1);
-        strecken.get(0).getBahnhof1().setRueckAbfahrt(-1);
+        fahrplan.get(0).getBahnhof1().setHinAnkunft(-1);
+        fahrplan.get(0).getBahnhof1().setRueckAbfahrt(-1);
 
         // Der letzte Bahnhof hat keine Abfahrtszeit auf der Hinfahrt und keine Ankunftszeit auf der Rückfahrt
-        strecken.get(strecken.size()-1).getBahnhof1().setRueckAnkunft(0);
-        strecken.get(strecken.size()-1).getBahnhof1().setHinAbfahrt(0);
+        fahrplan.get(strecken.size()-1).getBahnhof2().setRueckAnkunft(0);
+        fahrplan.get(strecken.size()-1).getBahnhof2().setHinAbfahrt(0);
 
         // --- HINFAHRT ---
         for (int i = 0; i < fahrplan.size(); i++) {
