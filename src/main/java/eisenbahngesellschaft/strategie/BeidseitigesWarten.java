@@ -118,9 +118,11 @@ public class BeidseitigesWarten implements FahrplanStrategie {
 
             // Wenn der Fahrplan stabil ist, echte Bewertung durchführen
             if (fahrplanStabil) {
-                int aktuelleStrafpunkte = 0;
-                for (int wartezeit : wartezeitenHin) aktuelleStrafpunkte += (int) Math.pow(wartezeit, 2);
-                for (int wartezeit : wartezeitenRueck) aktuelleStrafpunkte += (int) Math.pow(wartezeit, 2);
+                int summeHin = 0;
+                int summeRueck = 0;
+                for (int wartezeit : wartezeitenHin)   summeHin   += wartezeit;
+                for (int wartezeit : wartezeitenRueck) summeRueck += wartezeit;
+                int aktuelleStrafpunkte = summeHin * summeHin + summeRueck * summeRueck;
 
                 if (aktuelleStrafpunkte < niedrigsteStrafpunkte) {
                     niedrigsteStrafpunkte = aktuelleStrafpunkte;
@@ -211,33 +213,26 @@ public class BeidseitigesWarten implements FahrplanStrategie {
 
 
     private int berechneScoreAusFahrplan(List<Strecke> fahrplan) {
-        int score = 0;
+        int summeHin = 0;
+        int summeRueck = 0;
 
-        // Wartezeiten der Hinfahrt addieren (außer erster Bahnhof)
         for (int i = 1; i < fahrplan.size(); i++) {
             Bahnhof bhf = fahrplan.get(i).getBahnhof1();
-            int ankunftVorher = fahrplan.get(i - 1).getBahnhof2().getHinAnkunft();
-            int fruehesteAbfahrt = ankunftVorher + Strecke.EINSTIEGSZEIT;
-
+            int fruehesteAbfahrt = fahrplan.get(i - 1).getBahnhof2().getHinAnkunft() + Strecke.EINSTIEGSZEIT;
             int wartezeit = (bhf.getHinAbfahrt() - fruehesteAbfahrt) % 60;
             if (wartezeit < 0) wartezeit += 60;
-
-            score += (wartezeit * wartezeit);
+            summeHin += wartezeit;                      // ← nicht mehr quadrieren
         }
 
-        // Wartezeiten der Rückfahrt addieren (außer letzter Bahnhof der Gesamtstrecke)
         for (int i = fahrplan.size() - 2; i >= 0; i--) {
             Bahnhof bhf = fahrplan.get(i).getBahnhof2();
-            int ankunftVorher = fahrplan.get(i + 1).getBahnhof1().getRueckAnkunft();
-            int fruehesteAbfahrt = ankunftVorher + Strecke.EINSTIEGSZEIT;
-
+            int fruehesteAbfahrt = fahrplan.get(i + 1).getBahnhof1().getRueckAnkunft() + Strecke.EINSTIEGSZEIT;
             int wartezeit = (bhf.getRueckAbfahrt() - fruehesteAbfahrt) % 60;
             if (wartezeit < 0) wartezeit += 60;
-
-            score += (wartezeit * wartezeit);
+            summeRueck += wartezeit;                    // ← nicht mehr quadrieren
         }
 
-        return score;
+        return summeHin * summeHin + summeRueck * summeRueck;   // ← erst hier quadrieren
     }
 
     private List<Strecke> kopiereFahrplan(List<Strecke> original) {

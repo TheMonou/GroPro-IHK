@@ -1,0 +1,55 @@
+@startuml Strategie_Muster_Eisenbahngesellschaft
+
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #333333
+skinparam classArrowColor #333333
+skinparam arrowColor #333333
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+package "eisenbahngesellschaft.strategie" {
+    class FahrplanStrategie <<interface>> {
+        {abstract} +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+        {abstract} +getName(): String
+    }
+
+    class EinfacheFahrt {
+        +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+        +getName(): String
+    }
+
+    class EinseitigesWarten {
+        +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+        +getName(): String
+    }
+
+    class BeidseitigesWarten {
+        +ermittleFahrplan(strecken: List<Strecke>): List<Strecke>
+        +getName(): String
+    }
+
+    FahrplanStrategie <|.. EinfacheFahrt
+    FahrplanStrategie <|.. EinseitigesWarten
+    FahrplanStrategie <|.. BeidseitigesWarten
+}
+
+package "eisenbahngesellschaft" {
+    class FahrplanErmittler {
+        -strategien: List<FahrplanStrategie>
+        ---
+        +FahrplanErmittler(inputHandler, outputHandler)
+        +ermittleFahrplan(path: String): void
+        +addStrategie(strategie: FahrplanStrategie): void
+        +clearStrategien(): void
+    }
+
+
+}
+
+FahrplanErmittler o-down-> FahrplanStrategie : verwendet *
+
+
+
+@enduml
+

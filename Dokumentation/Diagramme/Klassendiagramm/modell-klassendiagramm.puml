@@ -1,0 +1,43 @@
+@startuml Modell_Klassendiagramm
+
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #333333
+skinparam classArrowColor #333333
+skinparam arrowColor #333333
+skinparam linetype ortho
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam classAttributeIconSize 0
+
+
+package "model" {
+    class Bahnhof {
+        -name: String
+        -hinAnkunft: int
+        -hinAbfahrt: int
+        -rueckAnkunft: int
+        -rueckAbfahrt: int
+        ---
+        +Bahnhof(name: String)
+        +copy(): Bahnhof
+    }
+
+    class Strecke {
+        -bahnhof1: Bahnhof
+        -bahnhof2: Bahnhof
+        -dauer: int
+        -kollision: boolean
+        {static} +EINSTIEGSZEIT: int
+        {static} +SICHERHEITSWARTEZEIT: int
+        ---
+        +Strecke(bahnhof1: Bahnhof, bahnhof2: Bahnhof, dauer: int)
+        +pruefeKollision(): boolean
+        +copy(): Strecke
+    }
+
+    Strecke --> Bahnhof : bahnhof1
+    Strecke --> Bahnhof : bahnhof2
+}
+
+@enduml
+

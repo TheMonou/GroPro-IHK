@@ -1,0 +1,104 @@
+<?plantuml 1.2026.2?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="486px" preserveAspectRatio="none"
+     style="width:453px;height:486px;background:#FFFFFF;" version="1.1" viewBox="0 0 453 486" width="453px"
+     zoomAndPan="magnify">
+    <defs/>
+    <g><!--cluster model-->
+        <g class="cluster" data-qualified-name="model" data-source-line="12" id="ent0002">
+            <polygon fill="none" points="16,6,63.2275,6,70.2275,29.1514,436,29.1514,436,479,16,479,16,6"
+                     style="stroke:#000000;stroke-width:1.5;"/>
+            <line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="70.2275" y1="29.1514" y2="29.1514"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing"
+                  textLength="41.2275" x="20" y="22.0752">model
+            </text>
+        </g><!--class Bahnhof-->
+        <g class="entity" data-qualified-name="model.Bahnhof" data-source-line="13" id="ent0003">
+            <rect fill="#FFFFFF" height="163.2109" rx="2.5" ry="2.5" style="stroke:#333333;stroke-width:0.5;"
+                  width="161.0303" x="145.5" y="300"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52.1582"
+                  x="199.936" y="319.0752">Bahnhof
+            </text>
+            <line style="stroke:#333333;stroke-width:0.5;" x1="146.5" x2="305.5303" y1="327.1514" y2="327.1514"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84.0342"
+                  x="151.5" y="345.2266">-name: String
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.3857"
+                  x="151.5" y="362.3779">-hinAnkunft: int
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91.0479"
+                  x="151.5" y="379.5293">-hinAbfahrt: int
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108.9375"
+                  x="151.5" y="396.6807">-rueckAnkunft: int
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106.5996"
+                  x="151.5" y="413.832">-rueckAbfahrt: int
+            </text>
+            <line style="stroke:#333333;stroke-width:1;" x1="146.5" x2="305.5303" y1="420.9082" y2="420.9082"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149.0303"
+                  x="151.5" y="438.9834">+Bahnhof(name: String)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107.0098"
+                  x="151.5" y="456.1348">+copy(): Bahnhof
+            </text>
+        </g><!--class Strecke-->
+        <g class="entity" data-qualified-name="model.Strecke" data-source-line="24" id="ent0004">
+            <rect fill="#FFFFFF" height="197.5137" rx="2.5" ry="2.5" style="stroke:#333333;stroke-width:0.5;"
+                  width="387.5527" x="32" y="42"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47.4619"
+                  x="202.0454" y="61.0752">Strecke
+            </text>
+            <line style="stroke:#333333;stroke-width:0.5;" x1="33" x2="418.5527" y1="69.1514" y2="69.1514"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122.9922"
+                  x="38" y="87.2266">-bahnhof1: Bahnhof
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122.9922"
+                  x="38" y="104.3779">-bahnhof2: Bahnhof
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63.0342"
+                  x="38" y="121.5293">-dauer: int
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112.0684"
+                  x="38" y="138.6807">-kollision: boolean
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="135.7549" x="38" y="155.832">+EINSTIEGSZEIT: int
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="205.748" x="38" y="172.9834">+SICHERHEITSWARTEZEIT: int
+            </text>
+            <line style="stroke:#333333;stroke-width:1;" x1="33" x2="418.5527" y1="180.0596" y2="180.0596"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="375.5527"
+                  x="38" y="198.1348">+Strecke(bahnhof1: Bahnhof, bahnhof2: Bahnhof, dauer: int)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166.9404"
+                  x="38" y="215.2861">+pruefeKollision(): boolean
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.3135"
+                  x="38" y="232.4375">+copy(): Strecke
+            </text>
+        </g><!--link Strecke to Bahnhof-->
+        <g class="link" data-entity-1="ent0004" data-entity-2="ent0003" data-link-type="dependency"
+           data-source-line="37" id="lnk5">
+            <path codeLine="37" d="M252.83,240.21 C252.83,260.01 252.83,274.59 252.83,293.72" fill="none"
+                  id="Strecke-to-Bahnhof" style="stroke:#333333;stroke-width:1;"/>
+            <polygon fill="#333333" points="252.83,299.72,256.83,290.72,252.83,294.72,248.83,290.72,252.83,299.72"
+                     style="stroke:#333333;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54.2217"
+                  x="197.83" y="267.0298">bahnhof1
+            </text>
+        </g><!--link Strecke to Bahnhof-->
+        <g class="link" data-entity-1="ent0004" data-entity-2="ent0003" data-link-type="dependency"
+           data-source-line="38" id="lnk6">
+            <path codeLine="38" d="M199.17,240.21 C199.17,260.01 199.17,274.59 199.17,293.72" fill="none"
+                  id="Strecke-to-Bahnhof-1" style="stroke:#333333;stroke-width:1;"/>
+            <polygon fill="#333333" points="199.17,299.72,203.17,290.72,199.17,294.72,195.17,290.72,199.17,299.72"
+                     style="stroke:#333333;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54.2217"
+                  x="144.17" y="284.0298">bahnhof2
+            </text>
+        </g>
+        <?plantuml-src XLBFQuCm6BtdhmZRfQKLrkxcOT0MjyfWXreOx1Orrc3C9qcaTAN_-rBhZwZTzXr4yjxBzzvJbJ5H44bo776Yr9f4sK52AU8DS93uyRKQf0Oqa36LDUMvcY5b9IKSVsEGlq3E1DMdWcAGEWKBKFh4gNbA5kaovnOI3cmVKwRfo94soh3Kr8z01EoRuYU4K66av43nGmunvG_uZB2PIe3N91Kf9FNPTHn1SkhYmDma3jrfoiHAPAL8j8kPq7qWJ4WgXu0iQPJTrzoWkoh7QTzdjRc9xMZQmH4KfydKRJ9Km0LPuOp2xA5skF36NVHLDhIy0yMaf79WD0FEcM8WN1m2S4f4YvsL9ff55ppp_8zWxtjlmPVdx_iNTAJ0tsoztTOmWi_LRk-DkRrMwbIJKPGv7aMOuywwrLnXFa12tvi4rnA76TfswtLskqslZlFI_a1kitpnFsM9BkW7?>
+    </g>
+</svg>
