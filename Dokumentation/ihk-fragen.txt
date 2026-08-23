@@ -1,0 +1,19 @@
+Zu den Fragen:
+Die Fragen waren grundsätzlich sehr fair und nicht Crazy zu Parallelisierung oder Effizienz oder Laufzeit Komplexität und sowas.
+
+Frage war zum Beispiel zum Strategie Pattern wie genau zu einer Oberklasse aussehen muss und dann hab ich halt gesagt abstrakte Klasse hat er gefragt. Gibt’s da auch noch ne andere Möglichkeit hab ich gesagt Interface hat er gefragt wo liegt der Unterschied? Hab ich gesagt ja ne Attribute hat er gesagt noch einen Unterschied hab ich gesagt Syntax ha ha beziehungsweise das war nur eine abstrakte Klasse erben kann aber verschiedene Interface implementieren einen Unterschied da hab ich nicht mehr drauf antworten können aber ich glaub das ist, dass man in der abstrakten Klasse auch Funktion hätte schon implementieren können.
+
+Oder es war ne Frage, die kam auch bei Lars danach. Ich denke die wird oft gestellt: wieso kann ein Abschnitt nicht 30 Minuten oder länger sein? Wie kommt es dazu, Kollision?
+
+Asoziale Fragen von Mathieu: an welcher Personengruppe liegt es, dass beim beidseitigen warten, die Rückfahrt Startzeit frei wählbar ist, ohne auf den Score einzugehen? Keine Ahnung, weil ich hätte dadrauf antworten sollen. Ich hab gesagt, weil niemand von denen nach E und zurück nach D will. War aber falsch da hab ich gesagt vielleicht an den Lokführer dass die ausgetauscht werden war auch falsch dann hat er gesagt okay ist egal.
+
+Ansonsten hatte ich in meiner Präsentation Diagramm, was nicht umlkonform war, sondern einfach so ein bisschen paar Linien zwischen den Klassen hatte beim Strategie Pattern und dann musste ich an die Tafel zeichnen, wie es aussehen würde. Wenn das ein UL Diagramm wäre also wie die Pfeile aussehen würden und was der Vorteil davon ist, wenn man UML nutzt.
+
+Dann hat die Merkel noch gefragt, ob ich mir vorstellen könnte. Ein Szenario wo ich gar nicht auf Kollision prüfen muss ich gesagt ja gut Fehler Fälle aber das wollte ich nicht hören. Dann hat sie gesagt ja gut, wenn zwei Bahnhöfe gibt dann hab ich gesagt ne da müsste man immer noch auf Kollision prüfen falls zum Beispiel 30 Minuten oder länger, dass der Abschnitt ist
+
+Zuerst hatte ich noch geantwortet, wenn die Strecke zb 0 Minuten wäre hab das aber korrigiert, weil das wegen der Sicherheitsminute nicht geht. Da hat dann der Gotha Typ der meine Arbeit tatsächlich gelesen und korrigiert. Hat gefragt ob das denn in meinem Code funktioniert überhaupt wenn Abstand 0 Minuten ist (weil ich tatsächlich das als Fehlerfall habe) und dann hab ich halt gesagt ich hoffe, dass ich das als Fehlerfall habe.
+
+Außerdem hat mich der Korrektor noch gefragt, ob es wenn man bei einfacher Fahrt keine Kollision erkennt, ob es dann noch nötig ist die anderen Strategien zu machen hab ich gesagt nein, wäre nicht nötig 
+Da hat er gefragt und wir haben sie im Code gemacht da hab ich dann gesagt ja, da werden alle Strategien benutzt
+
+Ja das war’s eigentlich ziemlich mit den Fragen ansonsten hatte ich noch Eine obere Grenze von 20.000 Schritten gesetzt. da hat er mich gefragt wie ich auf 20.000 komme, ob das begründet ist warum das nicht 21.000 ist und was für ein Problem ich darin sehe, wenn man so Schranken willkürlich setzt
