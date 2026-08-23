@@ -3,10 +3,7 @@ package eisenbahngesellschaft;
 
 import eisenbahngesellschaft.io.*;
 import eisenbahngesellschaft.model.Strecke;
-import eisenbahngesellschaft.strategie.BeidseitigesWarten;
-import eisenbahngesellschaft.strategie.EinfacheFahrt;
-import eisenbahngesellschaft.strategie.EinseitigesWarten;
-import eisenbahngesellschaft.strategie.FahrplanStrategie;
+import eisenbahngesellschaft.strategie.*;
 
 
 import java.util.ArrayList;
@@ -58,6 +55,7 @@ public class Main {
         strategien.add(new EinfacheFahrt());
         strategien.add(new EinseitigesWarten());
         strategien.add(new BeidseitigesWarten());
+        strategien.add(new BeidSeitigesWartenParallel());
 
         InputHandlerInterface inputHandler = new ConcreteInputHandler();
         OutputHandlerInterface outputHandler = new ConcreteOutputHandler();
