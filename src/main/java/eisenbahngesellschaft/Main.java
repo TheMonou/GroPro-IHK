@@ -3,7 +3,11 @@ package eisenbahngesellschaft;
 
 import eisenbahngesellschaft.io.*;
 import eisenbahngesellschaft.model.Strecke;
-import eisenbahngesellschaft.strategie.*;
+import eisenbahngesellschaft.strategie.BeidSeitigesWartenParallel;
+import eisenbahngesellschaft.strategie.BeidseitigesWarten;
+import eisenbahngesellschaft.strategie.EinfacheFahrt;
+import eisenbahngesellschaft.strategie.EinseitigesWarten;
+import eisenbahngesellschaft.strategie.FahrplanStrategie;
 
 
 import java.util.ArrayList;
